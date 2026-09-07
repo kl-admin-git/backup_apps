@@ -65,12 +65,7 @@ export class BackupService {
       
     } catch (error:any) {
       const errorDetails = error.stderr || error.stdout || error.message || error;
-      this.logger.error(`ENTRAMOS AL ERROR Y NO LO IDENTIFICAMOS AUN`);
-      this.logger.error(`Error generando el backup de ${error}`);
-        //  this.logger.error(`Error generando el backup de ${stdout}`);
-      // this.logger.error(`Error generando el backup de ${error}`);
-      // this.logger.error(`Error generando el backup de ${createBackupDto.database}`);
-      // Limpiar archivo incompleto si llegó a crearse
+    
       if (fs.existsSync(filePath)) {
         fs.unlinkSync(filePath);
       }
