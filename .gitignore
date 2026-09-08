@@ -41,7 +41,7 @@ lerna-debug.log*
 .env.test.local
 .env.production.local
 .env.local
-
+autentication_google.json
 /src/data/conexion_backup.ts
 # temp directory
 .temp

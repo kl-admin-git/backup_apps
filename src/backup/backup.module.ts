@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
 import { BackupService } from './backup.service.js';
 import { BackupController } from './backup.controller.js';
+import { GoogleModule } from '../google/google.module.js';
 
 @Module({
+  imports:[GoogleModule],
   controllers: [BackupController],
   providers: [BackupService],
   exports:[BackupService]

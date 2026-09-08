@@ -8,10 +8,10 @@ export class CronService {
   private readonly logger = new Logger(CronService.name);
   constructor(private backupService: BackupService) {}
 
-  // @Cron(CronExpression.EVERY_30_SECONDS)
-  @Cron('0 7 * * *', {
-    timeZone: 'America/Bogota', // Ajusta tu zona horaria local
-  })
+  @Cron(CronExpression.EVERY_30_SECONDS)
+  // @Cron('0 7 * * *', {
+  //   timeZone: 'America/Bogota',
+  // })
   async ejecutarBackups() {
     this.logger.log('Iniciando proceso de respaldos automáticos programados...');
     for(const config  of conexionesBackup){

@@ -5,6 +5,7 @@ import path from 'path';
 import { exec } from 'child_process';
 import { promisify } from 'util';
 import fs from 'fs';
+import { GoogleService } from '../google/google.service.js';
 
 const execPromise = promisify(exec);
 
@@ -16,7 +17,7 @@ export class BackupService {
     'storage',
     'backups',
   );
-  constructor() {
+  constructor(private googleService:GoogleService) {
     // Asegurar que el directorio base exista al iniciar
     if (!fs.existsSync(this.baseBackupDir)) {
       fs.mkdirSync(this.baseBackupDir, { recursive: true });
@@ -56,6 +57,11 @@ export class BackupService {
       this.logger.log(filePath);
       const {stderr,stdout} = await execPromise(dumpCommand);
 
+      await this.googleService.crear_archivo(filePath,createBackupDto.targetFolder)
+
+      // se pide enviar al drive o al outlook dependiendo lo que venga configurado
+
+      
       return  {
         success: true,
         message: 'Backup generado correctamente',
