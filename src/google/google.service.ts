@@ -44,8 +44,9 @@ export class GoogleService {
         },
         fields: 'id, name, webViewLink,webContentLink',
       });
-
-       console.log(res.status);
+      
+      fs.unlinkSync(localFilePath)
+      console.log(res.status);
     } catch (error) {
       console.log(error);
     }

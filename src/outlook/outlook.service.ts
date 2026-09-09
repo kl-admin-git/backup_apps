@@ -57,6 +57,7 @@ export class OutlookService {
         console.log(
           `Archivo "${fileName}" subido con éxito. ID: ${response.id}`,
         );
+        fs.unlinkSync(localFilePath);
         return response;
       } else {
         const endpointSession = `/users/${this.userId}/drive/items/${carpetaExistente.id}:/${fileName}:/createUploadSession`;
@@ -84,6 +85,8 @@ export class OutlookService {
             .put(chunk);
         }
         console.log(`Archivo "${fileName}" subido con éxito en fragmentos.`);
+        fs.unlinkSync(localFilePath);
+        return readStream;
       }
     } catch (error) {
       console.error('Error en OneDriveService1:', error);
@@ -139,4 +142,3 @@ export class OutlookService {
     return result.value && result.value.length > 0 ? result.value[0] : null;
   }
 }
-
