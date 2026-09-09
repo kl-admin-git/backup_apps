@@ -6,6 +6,8 @@ WORKDIR /usr/src/app
 RUN apt-get update && apt-get install -y --no-install-recommends \
     mariadb-client \
     postgresql-client \
+    gzip \
+    zip \
     && rm -rf /var/lib/apt/lists/*
     
 COPY package*.json ./

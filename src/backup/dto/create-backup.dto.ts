@@ -4,6 +4,11 @@ export enum DatabaseType {
   Postgres = 'postgres',
   MariaDB = 'mariadb',
 }
+
+export enum SiteBackupType {
+  GOOGLE = 'google',
+  OUTLOOK = 'outlook',
+}
 export class CreateBackupDto {
   @IsEnum(DatabaseType)
   type: DatabaseType;
@@ -19,4 +24,6 @@ export class CreateBackupDto {
   database: string;
   @IsNotEmpty()
   targetFolder: string;
+  @IsEnum(SiteBackupType)
+  backupSite: SiteBackupType;
 }

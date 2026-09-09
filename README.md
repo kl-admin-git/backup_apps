@@ -33,6 +33,11 @@ export enum DatabaseType {
   MariaDB = 'mariadb',
 }
 
+export enum SiteBackupType {
+  GOOGLE = 'google',
+  OUTLOOK = 'outlook',
+}
+
 export class CreateBackupDto {
   type: DatabaseType;
   host: string;
@@ -60,6 +65,7 @@ export const conexionesBackup: CreateBackupDto[] = [
     pass: "mi_password",
     database: "mi_db",
     targetFolder: "mi_subfolder"
+    backupSite:SiteBackupType.OUTLOOK
   },
   {
     type: DatabaseType.MySQL,
@@ -69,6 +75,7 @@ export const conexionesBackup: CreateBackupDto[] = [
     pass: "mi_password",
     database: "mi_db",
     targetFolder: "mi_subfolder"
+    backupSite:SiteBackupType.OUTLOOK
   }
 ];
 ```
@@ -157,3 +164,16 @@ Ejecuta el proceso de volcado de la base de datos objetivo.
    ```
 
 > **Nota sobre herencia automática:** No es necesario otorgar permisos individuales a las subcarpetas creadas mediante código. Al especificar el `parentFolderId` (`parents: [FOLDER_ID]`), Google Drive hereda automáticamente el rol de Editor concedido en la carpeta principal.
+
+
+### 2. Configurar Carpeta en OUTLOOK Drive
+
+1. Crea un archivo `.env` en la raíz del proyecto y agrega la variable:
+   ```env
+    FOLDER_ID="1A2b3C4d5E6f7G8h9I0jKLMN"
+    AZURE_TENANT_ID="**************"
+    AZURE_CLIENT_ID="*********"
+    AZURE_CLIENT_SECRET="****************"
+    MICROSOFT_USER_ID="****************"
+   ```
+2. por el momento no sabemos identificar el id de la carpeta Backups(AWS) si este nombre cambiar realizar el cambio respectivo en la funcion obtenerOCrearSubfolder que recibe ese string

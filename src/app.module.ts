@@ -6,6 +6,7 @@ import { BackupModule } from './backup/backup.module.js';
 import { CronModule } from './cron/cron.module.js';
 import { GoogleModule } from './google/google.module.js';
 import { ConfigModule } from '@nestjs/config';
+import { OutlookModule } from './outlook/outlook.module.js';
 
 @Module({
   imports: [
@@ -15,7 +16,8 @@ import { ConfigModule } from '@nestjs/config';
     ScheduleModule.forRoot(),
     BackupModule,
     CronModule,
-    GoogleModule
+    GoogleModule,
+    OutlookModule
   ],
   controllers: [AppController],
   providers: [AppService],
