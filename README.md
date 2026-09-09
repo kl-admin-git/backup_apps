@@ -1,6 +1,6 @@
 # Documentación Técnica: `BackupService`
 
-Servicio de **NestJS** encargado de gestionar y ejecutar la generación de respaldos (*dumps*) para motores de base de datos **MySQL** y **PostgreSQL** mediante ejecuciones de CLI nativas (`mysqldump` y `pg_dump`), coordinando además su almacenamiento local e integración con **Google Drive API**.
+Servicio de **NestJS** encargado de gestionar y ejecutar la generación de respaldos (*dumps*) para motores de base de datos **MySQL** y **PostgreSQL** mediante ejecuciones de CLI nativas (`mysqldump` y `pg_dump`), coordinando además su almacenamiento local e integración con **Google Drive API** - **OUTLOOK**.
 
 ---
 
