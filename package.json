@@ -42,6 +42,8 @@
     "@nestjs/mau": "^0.2.6",
     "@nestjs/schematics": "^12.0.0",
     "@nestjs/testing": "^12.0.1",
+    "@swc/cli": "^0.8.0",
+    "@swc/core": "^1.10.0",
     "@types/express": "^5.0.0",
     "@types/isomorphic-fetch": "^0.0.39",
     "@types/node": "^24.0.0",

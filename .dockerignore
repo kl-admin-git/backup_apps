@@ -1,0 +1,9 @@
+node_modules
+dist
+storage
+.env
+.env.*
+.git
+.gitignore
+*.log
+autentication_google.json

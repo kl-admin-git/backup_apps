@@ -40,17 +40,15 @@ export class BackupService {
      
     const filePath = path.join(targetDir, fileName);
     const filePathZip = path.join(targetDir, fileZip);
+    const passArg = createBackupDto.pass ? `-p"${createBackupDto.pass}"` : '';
     let dumpCommand = '';
-    if (createBackupDto.type === DatabaseType.MySQL) {
-      // mysqldump para MySQL / MariaDB
-     dumpCommand = `mariadb-dump --skip-ssl -h ${createBackupDto.host} -P ${createBackupDto.port} -u ${createBackupDto.user} -p"${createBackupDto.pass}" ${createBackupDto.database} > "${filePath}" && zip -j "${filePathZip}" "${filePath}" && rm "${filePath}";`;
+    if (createBackupDto.type === DatabaseType.MySQL || createBackupDto.type === DatabaseType.MariaDB) {
+      // mysqldump / mariadb-dump para MySQL y MariaDB
+      dumpCommand = `mariadb-dump --skip-ssl -h ${createBackupDto.host} -P ${createBackupDto.port} -u ${createBackupDto.user} ${passArg} ${createBackupDto.database} > "${filePath}" && zip -j "${filePathZip}" "${filePath}" && rm "${filePath}";`;
     } else if (createBackupDto.type === DatabaseType.Postgres) {
       // pg_dump para PostgreSQL
-      dumpCommand = `PGPASSWORD='${createBackupDto.pass}' pg_dump -h ${createBackupDto.host} -p ${createBackupDto.port} -U ${createBackupDto.user} -d ${createBackupDto.database} -F p -f "${filePath}" && zip -j "${filePathZip}" "${filePath}" && rm "${filePath};`;
-    } else if(createBackupDto.type === DatabaseType.MariaDB){
-
-       dumpCommand = `mariadb-dump --skip-ssl -h ${createBackupDto.host} -P ${createBackupDto.port} -u ${createBackupDto.user} -p"${createBackupDto.pass}" ${createBackupDto.database} > "${filePath}" && zip -j "${filePathZip}" "${filePath}" && rm "${filePath}";`;
-    }else {
+      dumpCommand = `PGPASSWORD='${createBackupDto.pass || ''}' pg_dump -h ${createBackupDto.host} -p ${createBackupDto.port} -U ${createBackupDto.user} -d ${createBackupDto.database} -F p -f "${filePath}" && zip -j "${filePathZip}" "${filePath}" && rm "${filePath};`;
+    } else {
       throw new Error(`Motor de base de datos no soportado: ${createBackupDto.type}`);
     }
      this.logger.log(`'${dumpCommand}'`);
