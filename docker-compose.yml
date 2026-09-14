@@ -2,7 +2,7 @@
 services:
   backup-tool:
     build: .
-    image: backup-tool:latest
+    image: ghcr.io/kl-admin-git/backup-tool:latest
     container_name: nestjs-backup-tool
     extra_hosts:
       - "host.docker.internal:host-gateway"
@@ -14,5 +14,6 @@ services:
     volumes:
       - ./storage:/usr/src/app/storage
       - ./${ENV_FILE:-.env.db.docker}:/usr/src/app/.env
+      - ./${CONEXION_FILE:-conexion_backup.json}:/usr/src/app/conexion_backup.json
     environment:
       - NODE_ENV=production
